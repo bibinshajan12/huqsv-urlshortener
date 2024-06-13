@@ -75,18 +75,18 @@ This is a simple URL Shortener application built with Django. It allows users to
 11. **Project Structure**
     ```bash
         urlshortener/
-    ├── __init__.py
-    ├── admin.py
-    ├── apps.py
-    ├── forms.py
-    ├── models.py
-    ├── tests/
-    │   ├── __init__.py
-    │   ├── test_forms.py
-    │   ├── test_models.py
-    │   └── test_views.py
-    ├── urls.py
-    └── views.py
-    manage.py
-    docker-compose.yml
-    .env.example
+            ├── __init__.py
+            ├── admin.py
+            ├── apps.py
+            ├── forms.py
+            ├── models.py
+            ├── tests/
+            │   ├── __init__.py
+            │   ├── test_forms.py
+            │   ├── test_models.py
+            │   └── test_views.py
+            ├── urls.py
+            └── views.py
+            manage.py
+            docker-compose.yml
+            .env.example
