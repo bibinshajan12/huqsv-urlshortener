@@ -5,6 +5,7 @@ from .forms import URLForm
 import subprocess
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from urllib.parse import urlparse
 
 @login_required
 def home(request):
@@ -19,15 +20,22 @@ def home(request):
     """
     form = URLForm(username=request.user.username)
     shortened_url = None
+    print(f'call from pytestttt with {request.user.username}')
     if request.method == 'POST':
         form = URLForm(request.POST, username=request.user.username)
+        print(f'the form status is {form.errors}')
         if form.is_valid():
             original_url = form.cleaned_data['original_url']
             username = form.cleaned_data['username']
             print(f'the original url is {original_url}')
-            short_url = ShortURL.objects.create(original_url=original_url, created_by=username)
-            shortened_url = request.build_absolute_uri('/') + short_url.short_url
-            print(f'the short_url url is {short_url} and{shortened_url}')
+            # short_url = ShortURL.objects.create(original_url=original_url, created_by=username)
+            # shortened_url = request.build_absolute_uri('/') + short_url.short_url
+            original_url = form.cleaned_data['original_url']
+            parsed_url = urlparse(original_url)
+            short_url_instance = ShortURL.objects.create(original_url=original_url, created_by=request.user.username)
+            # Construct the shortened URL using the scheme and netloc of the original URL
+            shortened_url = f"{parsed_url.scheme}://{parsed_url.netloc}/{short_url_instance.short_url}"
+            print(f'the short_url url is {short_url_instance} and{shortened_url}')
 
     user_urls = ShortURL.objects.filter(created_by=request.user.username)
     return render(request, 'urlshortener/home.html', {'form': form, 'shortened_url': shortened_url, 'user': request.user, 'user_urls': user_urls})

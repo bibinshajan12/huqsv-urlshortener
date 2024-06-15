@@ -3,7 +3,8 @@
 from urlshortener.forms import URLForm
 
 def test_urlform_valid():
-    form = URLForm(data={'original_url': 'https://www.example.com'})
+    form = URLForm(data={'original_url': 'https://www.samplesite.com','username': 'testuser'})
+    print(f'the form data is {form}')
     assert form.is_valid()
 
 def test_urlform_invalid():

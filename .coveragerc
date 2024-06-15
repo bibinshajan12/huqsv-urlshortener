@@ -1,0 +1,22 @@
+# .coveragerc
+
+[run]
+branch = True
+source =
+    urlshortener
+
+[report]
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:
+
+omit =
+    */config/*
+    config/settings.py
+    config/urls.py
+    shorturl/asgi.py
+    conf.py
+    manage.py
+    shorturl/wsgi.py
+    urlshortener/tests_bkp.py
+    
