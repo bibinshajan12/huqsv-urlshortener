@@ -8,6 +8,7 @@ This is a simple URL Shortener application built with Django. It allows users to
 - Create short URLs
 - List user-specific short URLs
 - Redirect to the original URL using the short URL
+- View the auto generated code documentationas full fledged HTML pages using Sphinx
 - Generate detailed code coverage reports using pytest
 
 ## Requirements
