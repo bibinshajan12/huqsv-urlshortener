@@ -36,6 +36,8 @@ def home(request):
             # Construct the shortened URL using the scheme and netloc of the original URL
             shortened_url = f"{parsed_url.scheme}://{parsed_url.netloc}/{short_url_instance.short_url}"
             print(f'the short_url url is {short_url_instance} and{shortened_url}')
+        else:
+            print(form.errors)
 
     user_urls = ShortURL.objects.filter(created_by=request.user.username)
     return render(request, 'urlshortener/home.html', {'form': form, 'shortened_url': shortened_url, 'user': request.user, 'user_urls': user_urls})
