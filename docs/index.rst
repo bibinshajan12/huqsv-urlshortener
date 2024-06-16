@@ -11,6 +11,7 @@ Welcome to urlshortener's documentation!
    :caption: Contents:
 
    modules
+   flowdiagram
 
 
 Indices and tables
