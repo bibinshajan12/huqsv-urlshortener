@@ -12,6 +12,7 @@ Welcome to urlshortener's documentation!
 
    modules
    flowdiagram
+   project
 
 
 Indices and tables
