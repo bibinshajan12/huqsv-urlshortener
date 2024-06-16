@@ -65,6 +65,9 @@ This is a simple URL Shortener application built with Django. It allows users to
    2. cd urlshortener
    3. docker-compose up --build or docker-compose up --build --force-recreate
    4. Open your web browser and navigate to http://localhost:8000.
+   5. By default the docker creates a admin user name and password, which could be used to login to the application
+      username : admin
+      pwd : adminpassword
 9.  **Running Tests and Generate Coverage Report**
     ```bash
         pytest
