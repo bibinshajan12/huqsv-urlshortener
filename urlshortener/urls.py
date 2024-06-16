@@ -14,4 +14,4 @@ urlpatterns = [
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
-    urlpatterns += static('/docs/', document_root='docs/build/')
+    urlpatterns += static('/docs/', document_root='docs/_build/html')

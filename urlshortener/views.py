@@ -97,4 +97,4 @@ def documentation(request):
     Returns:
         The index.html page of the sphinx autodocumentation script
     """
-    return redirect('/docs/build/index.html')
+    return redirect('/docs/_build/html/index.html')
