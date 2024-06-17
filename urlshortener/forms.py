@@ -16,6 +16,19 @@ from django.core.validators import URLValidator
 
 
 class URLForm(forms.Form):
+    """
+    The Form is used to gather the info from the user and then use that to shorten the URL specified
+
+    Args:
+        forms (_type_): Initialize the capture the form inputs and validate the same
+
+    Raises:
+        forms.ValidationError: Validations errors on the URL as a whole(for instance, the structure, path and type)
+        forms.ValidationError: Scheme related errors on the input URL
+
+    Returns:
+        _type_: _description_
+    """
     original_url = forms.URLField(
         label='Enter URL to shorten',
         max_length=200,

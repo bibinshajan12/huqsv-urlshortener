@@ -12,8 +12,8 @@ class ShortURL(models.Model):
     """
     original_url = models.URLField()
     short_url = models.CharField(max_length=10, unique=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)  # Add the created_at field
-    created_by = models.CharField(max_length=150, null=True, blank=True)  # Add the created_by field
+    created_at = models.DateTimeField(auto_now_add=True)  
+    created_by = models.CharField(max_length=150, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         """
