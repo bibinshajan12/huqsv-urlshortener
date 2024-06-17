@@ -16,7 +16,7 @@ def home(request):
         request: The HTTP request object.
 
     Returns:
-        HttpResponse: The rendered home page.
+        HttpResponse: The rendered home page with the shortened URL.
     """
     form = URLForm(username=request.user.username)
     shortened_url = None
@@ -33,7 +33,7 @@ def home(request):
             original_url = form.cleaned_data['original_url']
             parsed_url = urlparse(original_url)
             short_url_instance = ShortURL.objects.create(original_url=original_url, created_by=request.user.username)
-            # Construct the shortened URL using the scheme and netloc of the original URL
+            # This is used to construct the shortened URL using the scheme and netloc of the original URL
             shortened_url = f"{parsed_url.scheme}://{parsed_url.netloc}/{short_url_instance.short_url}"
             print(f'the short_url url is {short_url_instance} and{shortened_url}')
         else:
@@ -44,13 +44,22 @@ def home(request):
 
 @login_required
 def run_tests(request):
+    """
+    A complete test suite run the pytest framework on top of the codebase
+
+    Args:
+        request (_type_): Http request header object.
+
+    Returns:
+        HttpResponse: The rendered home page of the test results.
+    """
     if request.method == 'POST':
         try:
             result = subprocess.run(
                 ['pytest', '--tb=short', '-q'],
                 capture_output=True,
                 text=True,
-                cwd='/app'  # Ensure the working directory is correct
+                cwd='/app'
             )
             output = result.stdout + '\n' + result.stderr
         except Exception as e:
