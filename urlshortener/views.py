@@ -6,6 +6,7 @@ import subprocess
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from urllib.parse import urlparse
+from .utils import generate_short_url
 
 @login_required
 def home(request):
@@ -26,16 +27,26 @@ def home(request):
         print(f'the form status is {form.errors}')
         if form.is_valid():
             original_url = form.cleaned_data['original_url']
-            username = form.cleaned_data['username']
-            print(f'the original url is {original_url}')
-            # short_url = ShortURL.objects.create(original_url=original_url, created_by=username)
-            # shortened_url = request.build_absolute_uri('/') + short_url.short_url
-            original_url = form.cleaned_data['original_url']
-            parsed_url = urlparse(original_url)
-            short_url_instance = ShortURL.objects.create(original_url=original_url, created_by=request.user.username)
-            # This is used to construct the shortened URL using the scheme and netloc of the original URL
-            shortened_url = f"{parsed_url.scheme}://{parsed_url.netloc}/{short_url_instance.short_url}"
-            print(f'the short_url url is {short_url_instance} and{shortened_url}')
+            short_url, status_flag = generate_short_url(original_url)
+            if status_flag:
+                short_url_instance = ShortURL.objects.create(
+                    original_url=original_url,
+                    short_url=short_url,
+                    created_by=form.cleaned_data['username']
+                )
+                short_url = f"/{short_url_instance.short_url}"
+            shortened_url = request.build_absolute_uri(short_url)
+            # original_url = form.cleaned_data['original_url']
+            # username = form.cleaned_data['username']
+            # print(f'the original url is {original_url}')
+            # # short_url = ShortURL.objects.create(original_url=original_url, created_by=username)
+            # # shortened_url = request.build_absolute_uri('/') + short_url.short_url
+            # original_url = form.cleaned_data['original_url']
+            # parsed_url = urlparse(original_url)
+            # short_url_instance = ShortURL.objects.create(original_url=original_url, created_by=request.user.username)
+            # # This is used to construct the shortened URL using the scheme and netloc of the original URL
+            # shortened_url = f"{parsed_url.scheme}://{parsed_url.netloc}/{short_url_instance.short_url}"
+            # print(f'the short_url url is {short_url_instance} and{shortened_url}')
         else:
             print(form.errors)
 
@@ -97,6 +108,7 @@ def view_saved_urls(request):
         HttpResponse: The rendered saved URL page.
     """
     urls = ShortURL.objects.all()
+    print('the call is here')
     return render(request, 'urlshortener/saved_urls.html', {'urls': urls})
 
 def documentation(request):
