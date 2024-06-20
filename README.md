@@ -26,7 +26,7 @@ This is a simple URL Shortener application built with Django. It allows users to
 
    ```bash
    git clone https://github.com/bibinshajan12/huqsv-urlshortener.git
-   cd urlshortener
+   cd huqsv-urlshortener
 
 2. **Create and activate a virtual environment:**
    ```bash
@@ -61,7 +61,7 @@ This is a simple URL Shortener application built with Django. It allows users to
 8. **Using Docker**
    ```bash
    1. git clone https://github.com/bibinshajan12/huqsv-urlshortener.git
-   2. cd urlshortener
+   2. cd huqsv-urlshortener
    3. docker-compose up --build or docker-compose up --build --force-recreate
    4. Open your web browser and navigate to http://localhost:8000.
 9.  **Running Tests and Generate Coverage Report**
