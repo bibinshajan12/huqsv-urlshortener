@@ -20,7 +20,7 @@ This is a simple URL Shortener application built with Django. It allows users to
 
 ## Installation
 
-### Using Poetry
+### Using Native app services
 
 1. **Clone the repository:**
 
